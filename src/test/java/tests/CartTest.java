@@ -1,7 +1,11 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
+import io.qameta.allure.junit5.AllureJunit5;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import pages.AuthenticationPage;
@@ -12,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(AllureJunit5.class)
 public class CartTest extends BaseTest {
     private static final String VALID_USER_NAME = "standard_user";
     private static final String VALID_USER_PASSWORD = "secret_sauce";
@@ -28,6 +33,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing add to cart functionality")
     public void testAddToCartButton() {
         WebElement addToCartButton = productsPage.getAddToCartButton(0);
         String initialButtonText = addToCartButton.getText();
@@ -44,6 +50,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing add to cart functionality")
     public void testAddToCartAndCheckCart() {
         productsPage.addProductToCartByIndex(0);
         productsPage.clickCartIcon();
@@ -66,6 +73,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing cart badge behavior")
     public void testBadgeShouldThrowNoSuchElementExceptionWhenCartEmpty() {
         productsPage.addProductToCartByIndex(0);
         productsPage.clickCartIcon();
@@ -82,6 +90,7 @@ public class CartTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing cart icon navigation")
     public void testCartIconNavigation() {
         productsPage.clickCartIcon();
         assertEquals(

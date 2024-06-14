@@ -1,8 +1,12 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
+import io.qameta.allure.junit5.AllureJunit5;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import pages.AuthenticationPage;
 import utils.CustomWebDriverManager;
@@ -10,6 +14,7 @@ import utils.CustomWebDriverManager;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(AllureJunit5.class)
 public class AuthenticationTest extends BaseTest {
     private static final String WEB_LINK = "https://www.saucedemo.com/";
     private static final String VALID_USER_NAME = "standard_user";
@@ -29,6 +34,7 @@ public class AuthenticationTest extends BaseTest {
     }
 
     @Test
+    @Step("Login validity testing")
     public void testValidLogin() {
         AuthenticationPage loginPage = new AuthenticationPage(driver);
         loginPage.login(VALID_USER_NAME, VALID_USER_PASSWORD);
@@ -37,6 +43,7 @@ public class AuthenticationTest extends BaseTest {
     }
 
     @Test
+    @Step("Login invalidity testing")
     public void testInvalidLogin() {
         AuthenticationPage loginPage = new AuthenticationPage(driver);
         loginPage.login(INVALID_USER_NAME, INVALID_USER_PASSWORD);
@@ -46,6 +53,7 @@ public class AuthenticationTest extends BaseTest {
     }
 
     @Test
+    @Step("Product page url validity testing")
     public void testValidProductPageUrl() {
         AuthenticationPage loginPage = new AuthenticationPage(driver);
         loginPage.login(VALID_USER_NAME, VALID_USER_PASSWORD);

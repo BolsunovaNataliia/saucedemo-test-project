@@ -1,7 +1,11 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
+import io.qameta.allure.junit5.AllureJunit5;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -12,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@ExtendWith(AllureJunit5.class)
 public class ProductsTest extends BaseTest {
     private static final String VALID_USER_NAME = "standard_user";
     private static final String VALID_USER_PASSWORD = "secret_sauce";
@@ -27,6 +32,7 @@ public class ProductsTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing product link image navigation")
     public void testProductLinkImageNavigation() {
         WebElement productImage = productsPage.getProductImage(0);
         productImage.click();
@@ -34,6 +40,7 @@ public class ProductsTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing add to cart functionality")
     public void testAddToCartButton() {
         WebElement addToCartButton = productsPage.getAddToCartButton(0);
         String initialButtonText = addToCartButton.getText();
@@ -50,6 +57,7 @@ public class ProductsTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing product link navigation")
     public void testProductLinkNavigation() {
         WebElement productLink = productsPage.getProductLink(0);
         productLink.click();
@@ -66,6 +74,7 @@ public class ProductsTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing product count")
     public void testProductCount() {
         ProductsPage productsPage = new ProductsPage(driver);
         int productCount = productsPage.getProductCount();
@@ -77,6 +86,7 @@ public class ProductsTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing badge functionality")
     public void testBadgeShouldThrowNoSuchElementExceptionWhenCartEmpty() {
         assertThrows(NoSuchElementException.class,
                 () -> {
@@ -85,6 +95,7 @@ public class ProductsTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing add product to cart functionality")
     public void testAddProductToCart() {
         ProductsPage productsPage = new ProductsPage(driver);
         if (productsPage.getProductCount() > 0) {
@@ -96,6 +107,7 @@ public class ProductsTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing cart icon navigation")
     public void testCartIconNavigation() {
         productsPage.clickCartIcon();
         assertEquals(
@@ -106,6 +118,7 @@ public class ProductsTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing filter dropdown functionality")
     public void testFilterDropdown() {
         productsPage.openFilterDropdown();
         productsPage.selectFilterOption("Price (low to high)");
@@ -115,6 +128,7 @@ public class ProductsTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing product name hover")
     public void testHoverOverProductTitle() {
         WebElement productLink = productsPage.getProductLink(0);
 
@@ -129,6 +143,7 @@ public class ProductsTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing Facebook icon functionality")
     public void testFacebookIcon() {
         String originalWindow = driver.getWindowHandle();
         productsPage.clickFacebookIcon();
@@ -148,6 +163,7 @@ public class ProductsTest extends BaseTest {
     }
 
     @Test
+    @Description("Testing the presence of the burger menu icon")
     public void testBurgerMenuIconPresence() {
         assertTrue(
                 productsPage.isBurgerMenuIconPresent(),
